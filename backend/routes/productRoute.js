@@ -16,7 +16,7 @@ router.route("/products").get(getAllProducts);
 //Create Products
 router.route("/products/new").post(createProduct);
 
-//update & delete products
+//update, delete & getProduct Details
 router
   .route("/products/:id")
   .put(updateProducts)
