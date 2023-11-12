@@ -12,3 +12,5 @@ connectDatabase();
 app.listen(process.env.port, () => {
   console.log(`Server is running on http://localhost:${process.env.port}`);
 });
+
+//Unhandled Promise  Rejection
