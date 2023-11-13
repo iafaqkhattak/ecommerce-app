@@ -68,7 +68,6 @@ exports.updateProducts = catchAsync(async (req, res, next) => {
 });
 
 // Delete Products
-
 exports.deleteProducts = catchAsync(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
 
