@@ -4,7 +4,6 @@ const User = require("../models/userModels");
 const sendToken = require("../utils/jwtToken");
 
 // Register a user
-
 exports.registerUser = catchAsync(async (req, res, next) => {
   const { name, email, password } = req.body;
 
@@ -27,7 +26,6 @@ exports.registerUser = catchAsync(async (req, res, next) => {
 });
 
 // Login
-
 exports.loginUser = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -42,7 +40,7 @@ exports.loginUser = catchAsync(async (req, res, next) => {
     return next(new ErrorHandler("Invalid Email or Password", 401));
   }
 
-  const isPasswordMatched = user.comparePassword();
+  const isPasswordMatched = await user.comparePassword(password);
 
   if (!isPasswordMatched) {
     return next(new ErrorHandler("Invalid Email or Password", 401));
@@ -55,4 +53,18 @@ exports.loginUser = catchAsync(async (req, res, next) => {
   //   success: true,
   //   token,
   // });
+});
+
+//Logout
+
+exports.logOutUser = catchAsync(async (req, res, next) => {
+  res.cookie("token", null, {
+    expires: new Date(Date.now()),
+    httpOnly: true,
+  });
+
+  res.status(200).json({
+    success: true,
+    messgae: "Logged Out",
+  });
 });
