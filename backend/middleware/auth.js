@@ -1,3 +1,5 @@
+//created token and saving in the cookies
+
 const catchAsync = require("../middleware/asyncFuncErrorHandler");
 const ErrorHandler = require("../utils/errorHandler");
 const jwt = require("jsonwebtoken");
@@ -14,3 +16,19 @@ exports.isAuthenticated = catchAsync(async (req, res, next) => {
 
   next();
 });
+
+// check whether user is admin or not
+exports.isAuthorizedRole = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new ErrorHandler(
+          `Role: ${req.user.role} is not allowed to access this resource`,
+          403
+        )
+      );
+    }
+
+    next();
+  };
+};

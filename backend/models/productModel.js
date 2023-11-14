@@ -68,6 +68,13 @@ const productSchema = mongoose.Schema({
     },
   ],
 
+  //check which user created a product
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: "user",
+    required: true,
+  },
+
   createAt: {
     type: Date,
     default: Date.now,
