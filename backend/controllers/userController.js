@@ -111,7 +111,7 @@ exports.forgetPassword = catchAsync(async (req, res, next) => {
 //Reset Password
 exports.resetPassword = catchAsync(async (req, res, next) => {
   //creating token hash
-  this.resetPasswordToken = crypto
+  const resetPasswordToken = crypto
     .createHash("sha256")
     .update(req.params.token)
     .digest("hex");
@@ -134,7 +134,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     return next(new ErrorHandler("Password does not matched", 400));
   }
 
-  user.password = user.body.password;
+  user.password = req.body.password;
 
   user.resetPasswordToken = undefined;
   user.resetPasswordExpire = undefined;
