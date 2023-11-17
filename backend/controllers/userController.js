@@ -158,13 +158,13 @@ exports.getUserDetails = catchAsync(async (req, res, next) => {
 exports.updatePassword = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id).select("+password");
 
-  const isPasswordMatched = await user.comparePassword(res.body.Oldpassword);
+  const isPasswordMatched = await user.comparePassword(req.body.oldPassword);
 
   if (!isPasswordMatched) {
     return next(new ErrorHandler("Old Password is incorrect", 400));
   }
 
-  if (res.body.newPassword !== res.body.confirmPassword) {
+  if (req.body.newPassword !== req.body.confirmPassword) {
     return next(new ErrorHandler("Password does not matched", 400));
   }
 
