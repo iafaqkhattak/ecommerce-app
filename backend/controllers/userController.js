@@ -185,7 +185,7 @@ exports.updateUserProfile = catchAsync(async (req, res, next) => {
 
   //we will add cloudnary later
 
-  const user = await User.findByIdAndUpdate(req.body.id, newUserData, {
+  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
     new: true,
     runValidators: true,
     useFindAndModify: false,
