@@ -47,6 +47,4 @@
 
 <br clear="both">
 
-<img src="https://raw.githubusercontent.com/iafaqkhattak/iafaqkhattak/output/snake.svg" alt="Snake animation" />
-
 ###
